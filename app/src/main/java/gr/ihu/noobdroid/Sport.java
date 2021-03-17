@@ -7,9 +7,9 @@ public class Sport {
     private boolean isTeamGame;
     private boolean isMaleGame;
 
-    public Sport(int anId, String aName, boolean isTeamGame, boolean isMaleGame) {
-        this.id = anId;
-        this.name = aName;
+    public Sport(int id, String name, boolean isTeamGame, boolean isMaleGame) {
+        this.id = id;
+        this.name = name;
         this.isTeamGame = isTeamGame;
         this.isMaleGame = isMaleGame;
     }
