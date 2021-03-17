@@ -15,4 +15,5 @@ public class MainActivity extends AppCompatActivity {
         Sport sport = new Sport(1, "Formula", true, true);
         localDB.add(sport);
     }
+
 }
