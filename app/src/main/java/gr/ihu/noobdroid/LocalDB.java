@@ -72,6 +72,7 @@ public class LocalDB extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
+    // TODO: add some validation
     public boolean add(Sport aSport) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -83,6 +84,40 @@ public class LocalDB extends SQLiteOpenHelper {
 
 
         long insert = db.insert(TABLE_SPORT, null, cv);
+        return (insert != -1);
+    }
+
+    // TODO: add some validation
+    public boolean add(Sportsman sportsman) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(SPORTSMAN_ID, sportsman.getId());
+        cv.put(SPORTSMAN_FIRST_NAME, sportsman.getFirstName());
+        cv.put(SPORTSMAN_LAST_NAME, sportsman.getLastName());
+        cv.put(SPORTSMAN_HEADQUARTERS, sportsman.getHeadquarters());
+        cv.put(SPORTSMAN_COUNTRY, sportsman.getCountry());
+        cv.put(SPORTSMAN_SPORT_ID, sportsman.getSportId());
+        cv.put(SPORTSMAN_BIRTH_YEAR, sportsman.getBirthYear());
+
+        long insert = db.insert(TABLE_SPORTSMAN, null, cv);
+        return (insert != -1);
+    }
+
+    // TODO: add some validation
+    public boolean add(Team team) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(TEAM_ID, team.getId());
+        cv.put(TEAM_NAME, team.getName());
+        cv.put(TEAM_STADIUM, team.getStadium());
+        cv.put(TEAM_HEADQUARTERS, team.getHeadquarters());
+        cv.put(TEAM_COUNTRY, team.getCounty());
+        cv.put(TEAM_SPORT_ID, team.getSportId());
+        cv.put(TEAM_ESTABLISH_YEAR, team.getEstablishYear());
+
+        long insert = db.insert(TABLE_TEAM, null, cv);
         return (insert != -1);
     }
 
