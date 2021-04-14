@@ -11,6 +11,7 @@ import java.util.List;
 @Dao
 public interface LocalDBInterface {
 
+    // Functions for Sports
     @Insert
     public void addSport(Sport sport);
 
@@ -22,5 +23,33 @@ public interface LocalDBInterface {
 
     @Update
     public void updateSport(Sport sport);
+
+
+    // Functions for Sportsman
+    @Insert
+    public void addSportsman(Sportsman sportsman);
+
+    @Query("select * from sportsman")
+    public List<Sportsman> getSportsman();
+
+    @Delete
+    public void deleteSportsman(Sportsman sportsman);
+
+    @Update
+    public void updateSportsman(Sportsman sportsman);
+
+
+    // Functions for Team
+    @Insert
+    public void addTeam(Team team);
+
+    @Query("select * from teams")
+    public List<Team> getTeams();
+
+    @Delete
+    public void deleteTeam(Team team);
+
+    @Update
+    public void updateTeam(Team team);
 
 }
