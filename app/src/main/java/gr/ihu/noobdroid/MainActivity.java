@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -62,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     void displayMessage(String message) {
-        Toast.makeText(content:this,message, Toast.LENGTH_LONG).show();
+        Context context;
+        Toast.makeText(getApplicationContext(),displayMessage(),Toast.LENGTH_LONG).show();
     }
 
 }
