@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="gr.ihu.noobdroid.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_sportFragment"
+            app:destination="@id/sportFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sportsmanFragment"
+            app:destination="@id/sportsmanFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_raceFragment"
+            app:destination="@id/raceFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sportFragment"
+        android:name="gr.ihu.noobdroid.SportFragment"
+        android:label="fragment_sport"
+        tools:layout="@layout/fragment_sport" />
+    <fragment
+        android:id="@+id/sportsmanFragment"
+        android:name="gr.ihu.noobdroid.SportsmanFragment"
+        android:label="fragment_sportsman"
+        tools:layout="@layout/fragment_sportsman" />
+    <fragment
+        android:id="@+id/raceFragment"
+        android:name="gr.ihu.noobdroid.RaceFragment"
+        android:label="fragment_race"
+        tools:layout="@layout/fragment_race" />
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="gr.ihu.noobdroid.TeamFragment"
+        android:label="fragment_team"
+        tools:layout="@layout/fragment_team" />
+</navigation>
