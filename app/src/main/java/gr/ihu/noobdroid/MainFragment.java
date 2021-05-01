@@ -3,18 +3,31 @@ package gr.ihu.noobdroid;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import gr.ihu.noobdroid.LocalDB.LocalDB;
 
 public class MainFragment extends Fragment {
+
+    public static FragmentManager fragmentManager;
+    public static LocalDB localDB;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        fragmentManager = this.getParentFragmentManager();
+        localDB = Room.databaseBuilder(
+                this.getContext(),
+                LocalDB.class,
+                "local"
+        ).allowMainThreadQueries().build();
     }
 
     @Override
@@ -25,7 +38,10 @@ public class MainFragment extends Fragment {
         view.findViewById(R.id.btn_sport).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.sportFragment);
+                MainFragmentDirections.ActionMainFragmentToSportFragment action;
+                action = MainFragmentDirections.actionMainFragmentToSportFragment(localDB);
+                Navigation.findNavController(v).navigate(action);
+
             }
         });
 

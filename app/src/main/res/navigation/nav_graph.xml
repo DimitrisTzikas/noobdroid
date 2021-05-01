@@ -27,7 +27,17 @@
         android:id="@+id/sportFragment"
         android:name="gr.ihu.noobdroid.SportFragment"
         android:label="fragment_sport"
-        tools:layout="@layout/fragment_sport" />
+        tools:layout="@layout/fragment_sport" >
+        <action
+            android:id="@+id/action_sportFragment_to_sportInsertFragment"
+            app:destination="@id/sportInsertFragment" />
+        <action
+            android:id="@+id/action_sportFragment_to_sportModifyFragment"
+            app:destination="@id/sportModifyFragment" />
+        <argument
+            android:name="localDB"
+            app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
+    </fragment>
     <fragment
         android:id="@+id/sportsmanFragment"
         android:name="gr.ihu.noobdroid.SportsmanFragment"
@@ -43,4 +53,18 @@
         android:name="gr.ihu.noobdroid.TeamFragment"
         android:label="fragment_team"
         tools:layout="@layout/fragment_team" />
+    <fragment
+        android:id="@+id/sportInsertFragment"
+        android:name="gr.ihu.noobdroid.SportInsertFragment"
+        android:label="fragment_sport_insert"
+        tools:layout="@layout/fragment_sport_insert" >
+        <argument
+            android:name="localDB"
+            app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
+    </fragment>
+    <fragment
+        android:id="@+id/sportModifyFragment"
+        android:name="gr.ihu.noobdroid.SportModifyFragment"
+        android:label="fragment_sport_modify"
+        tools:layout="@layout/fragment_sport_modify" />
 </navigation>

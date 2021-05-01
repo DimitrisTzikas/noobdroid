@@ -5,6 +5,14 @@
     <string name="sportsman">Sportsman</string>
     <string name="team">Team</string>
     <string name="race">Race</string>
+    <string name="insert">Insert</string>
+    <string name="modify">Modify</string>
+    <string name="delete">delete</string>
+    <string name="id">ID</string>
+    <string name="name">Name</string>
+    <string name="teamgame">Team Game</string>
+    <string name="malegame">Male Game</string>
+    <string name="cancel">Cancel</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
