@@ -66,5 +66,12 @@
         android:id="@+id/sportModifyFragment"
         android:name="gr.ihu.noobdroid.SportModifyFragment"
         android:label="fragment_sport_modify"
-        tools:layout="@layout/fragment_sport_modify" />
+        tools:layout="@layout/fragment_sport_modify" >
+        <argument
+            android:name="localDB"
+            app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
+        <argument
+            android:name="sportID"
+            app:argType="integer" />
+    </fragment>
 </navigation>
