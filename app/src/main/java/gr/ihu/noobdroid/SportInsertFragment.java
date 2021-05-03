@@ -1,5 +1,6 @@
 package gr.ihu.noobdroid;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,22 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import gr.ihu.noobdroid.LocalDB.LocalDB;
 import gr.ihu.noobdroid.LocalDB.Sport;
 
 public class SportInsertFragment extends Fragment {
 
-    private static LocalDB localDB;
-    private TextInputEditText inputID;
-    private TextInputEditText inputName;
-    private CheckBox boxTeamGame;
-    private CheckBox boxMaleGame;
-    private Button buttonInsert;
-    private Button buttonCancel;
+    public static LocalDB localDB;
+    public TextInputEditText inputID;
+    public TextInputEditText inputName;
+    public CheckBox boxTeamGame;
+    public CheckBox boxMaleGame;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,33 +42,53 @@ public class SportInsertFragment extends Fragment {
         inputName = view.findViewById(R.id.input_name);
         boxTeamGame = view.findViewById(R.id.box_team_game);
         boxMaleGame = view.findViewById(R.id.box_male_game);
-        buttonInsert = view.findViewById(R.id.btn_insert);
-        buttonCancel = view.findViewById(R.id.btn_cancel);
+        Button buttonInsert = view.findViewById(R.id.btn_confirm);
+        Button buttonCancel = view.findViewById(R.id.btn_cancel);
 
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (! isIdValid()) {
-                    // Handle error
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Invalid ID")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
                     return;
                 }
 
                 if (! isNameValid()) {
-                    // Handle error
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Invalid Name")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
                     return;
                 }
 
                 Sport sport = new Sport(
                         Integer.parseInt(inputID.getText().toString()),
-                        inputName.toString(),
+                        inputName.getText().toString(),
                         boxTeamGame.isChecked(),
                         boxMaleGame.isChecked()
                 );
                 try {
                     localDB.localDBInterface().addSport(sport);
-                    Toast.makeText(getContext(), "Sport added", Toast.LENGTH_LONG).show();
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Sport added")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.GREEN)
+                            .show();
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Something went wrong")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
                 }
 
                 reset();
@@ -88,12 +107,12 @@ public class SportInsertFragment extends Fragment {
 
     private Boolean isIdValid() {
         // Validate id
-        return true;
+        return !inputID.getText().toString().equals("");
     }
 
     private Boolean isNameValid() {
         // Validate name
-        return true;
+        return !inputName.getText().toString().equals("");
     }
 
     private void reset() {
