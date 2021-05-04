@@ -29,6 +29,7 @@ android {
 }
 
 apply plugin: "androidx.navigation.safeargs"
+apply plugin: "com.google.gms.google-services"
 
 dependencies {
 
@@ -40,6 +41,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-firestore:22.1.2'
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.muddzdev:styleabletoast:2.3.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
