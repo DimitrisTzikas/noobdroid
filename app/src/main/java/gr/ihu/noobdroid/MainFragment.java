@@ -48,7 +48,9 @@ public class MainFragment extends Fragment {
         view.findViewById(R.id.btn_sportsman).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.sportsmanFragment);
+                MainFragmentDirections.ActionMainFragmentToSportsmanFragment action;
+                action = MainFragmentDirections.actionMainFragmentToSportsmanFragment(localDB);
+                Navigation.findNavController(v).navigate(action);
             }
         });
 
@@ -62,7 +64,9 @@ public class MainFragment extends Fragment {
         view.findViewById(R.id.btn_team).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.teamFragment);
+                MainFragmentDirections.ActionMainFragmentToTeamFragment action;
+                action = MainFragmentDirections.actionMainFragmentToTeamFragment(localDB);
+                Navigation.findNavController(v).navigate(action);
             }
         });
 

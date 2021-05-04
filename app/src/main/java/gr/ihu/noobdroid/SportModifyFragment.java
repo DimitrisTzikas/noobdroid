@@ -43,7 +43,7 @@ public class SportModifyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sport_modify, container, false);
 
         sport = localDB.localDBInterface().getSportByID(sportID);
-        Button buttonModify = view.findViewById(R.id.btn_confirm);
+        Button buttonModify = view.findViewById(R.id.btn_insert);
         Button buttonCancel = view.findViewById(R.id.btn_cancel);
 
         outputID = view.findViewById(R.id.output_id);
@@ -124,6 +124,7 @@ public class SportModifyFragment extends Fragment {
     }
 
     public boolean isNameValid() {
+        // TODO
         // validate name
         return true;
     }

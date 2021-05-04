@@ -10,21 +10,19 @@ import android.view.ViewGroup;
 
 import gr.ihu.noobdroid.LocalDB.LocalDB;
 
-public class TeamFragment extends Fragment {
+public class SportsmanInsertFragment extends Fragment {
 
     public static LocalDB localDB;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        localDB = SportsmanFragmentArgs.fromBundle(getArguments()).getLocalDB();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_team, container, false);
+        View view = inflater.inflate(R.layout.fragment_sportsman_insert, container, false);
         return view;
     }
 }

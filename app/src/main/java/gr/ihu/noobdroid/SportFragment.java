@@ -41,7 +41,7 @@ public class SportFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sport, container, false);
 
-        Button buttonInsert = view.findViewById(R.id.btn_confirm);
+        Button buttonInsert = view.findViewById(R.id.btn_insert);
         Button buttonModify = view.findViewById(R.id.btn_modify);
         Button buttonDelete = view.findViewById(R.id.btn_delete);
 

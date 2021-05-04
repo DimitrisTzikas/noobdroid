@@ -42,7 +42,7 @@ public class SportInsertFragment extends Fragment {
         inputName = view.findViewById(R.id.input_name);
         boxTeamGame = view.findViewById(R.id.box_team_game);
         boxMaleGame = view.findViewById(R.id.box_male_game);
-        Button buttonInsert = view.findViewById(R.id.btn_confirm);
+        Button buttonInsert = view.findViewById(R.id.btn_insert);
         Button buttonCancel = view.findViewById(R.id.btn_cancel);
 
         buttonInsert.setOnClickListener(new View.OnClickListener() {
@@ -106,11 +106,13 @@ public class SportInsertFragment extends Fragment {
     }
 
     private Boolean isIdValid() {
+        // TODO
         // Validate id
         return !inputID.getText().toString().equals("");
     }
 
     private Boolean isNameValid() {
+        // TODO
         // Validate name
         return !inputName.getText().toString().equals("");
     }
