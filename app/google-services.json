@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566109808048",
+    "project_id": "noobdroid",
+    "storage_bucket": "noobdroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566109808048:android:6ea7f774f0a75362df2275",
+        "android_client_info": {
+          "package_name": "gr.ihu.noobdroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566109808048-or9mathnjd2ljpc2932ve6nt2rf0dfad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATrDkg14WUB-ov-HmxlfUMUbFyaw7Gzu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566109808048-or9mathnjd2ljpc2932ve6nt2rf0dfad.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
