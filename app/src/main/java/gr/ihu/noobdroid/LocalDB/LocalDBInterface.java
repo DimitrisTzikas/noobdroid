@@ -38,6 +38,9 @@ public interface LocalDBInterface {
     @Query("select * from sportsman")
     public List<Sportsman> getSportsman();
 
+    @Query("delete from sportsman where sportsman_id = :id")
+    public void deleteSportsmanById(int id);
+
     @Delete
     public void deleteSportsman(Sportsman sportsman);
 
