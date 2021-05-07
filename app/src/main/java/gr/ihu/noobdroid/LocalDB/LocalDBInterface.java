@@ -49,13 +49,18 @@ public interface LocalDBInterface {
     @Update
     public void updateSportsman(Sportsman sportsman);
 
-
     // Functions for Team
     @Insert
     public void addTeam(Team team);
 
     @Query("select * from teams")
     public List<Team> getTeams();
+
+    @Query("select * from teams where team_id = :id")
+    public Team getTeamByID(int id);
+
+    @Query("delete from teams where team_id = :id")
+    public void deleteTeamByID(int id);
 
     @Delete
     public void deleteTeam(Team team);

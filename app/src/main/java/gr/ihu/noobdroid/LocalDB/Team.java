@@ -1,8 +1,17 @@
 package gr.ihu.noobdroid.LocalDB;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.util.StringUtil;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity (tableName = "teams")
 public class Team {
@@ -22,6 +31,8 @@ public class Team {
     private int sportId;
     @ColumnInfo (name = "team_establish_year")
     private int establishYear;
+    @ColumnInfo (name = "team_players_ids")
+    private String teamPlayersIDs;
 
     public Team(int id, String name, String stadium, String headquarters, String country,
                 int sportId, int establishYear) {
@@ -32,6 +43,7 @@ public class Team {
         this.country = country;
         this.sportId = sportId;
         this.establishYear = establishYear;
+        this.teamPlayersIDs = "";
     }
 
     public void setId(int id) {
@@ -62,6 +74,17 @@ public class Team {
         this.establishYear = establishYear;
     }
 
+    public void setTeamPlayersIDs(String teamPlayersIDs) {
+        this.teamPlayersIDs = teamPlayersIDs;
+    }
+
+    public void setTeamPlayersID(ArrayList<Integer> teamPlayersIDs) {
+        this.teamPlayersIDs = "";
+        for (int i = 0; i < teamPlayersIDs.size(); i++) {
+            this.teamPlayersIDs += String.valueOf(teamPlayersIDs.get(i)) + ",";
+        }
+    }
+
     public int getId() { return this.id; }
 
     public String getName() { return this.name; }
@@ -75,6 +98,31 @@ public class Team {
     public int getSportId() { return this.sportId; }
 
     public int getEstablishYear() { return this.establishYear; }
+
+    public String getTeamPlayersIDs() {
+        return this.teamPlayersIDs;
+    }
+
+    public ArrayList<Integer> getTeamPlayersID() {
+        if (this.teamPlayersIDs.equals("")) {
+            return new ArrayList<Integer>();
+        }
+        else {
+            ArrayList<String> temp = (ArrayList<String>) Arrays.asList(this.teamPlayersIDs.split(","));
+            temp.remove(temp.size() - 1);
+            ArrayList<Integer> intTemp = new ArrayList<Integer>();
+
+            for (int i = 0; i < temp.size(); i++) {
+                intTemp.add(Integer.parseInt(temp.get(i)));
+            }
+
+            return intTemp;
+        }
+    }
+
+    public void addPlayer(int sportsmanId) {
+        this.teamPlayersIDs += String.valueOf(sportsmanId) + ",";
+    }
 
     @Override
     public String toString() {
