@@ -106,14 +106,12 @@ public class SportInsertFragment extends Fragment {
     }
 
     private Boolean isIdValid() {
-        // TODO
-        // Validate id
+        // TODO Validate id
         return !inputID.getText().toString().equals("");
     }
 
     private Boolean isNameValid() {
-        // TODO
-        // Validate name
+        // TODO Validate name
         return !inputName.getText().toString().equals("");
     }
 

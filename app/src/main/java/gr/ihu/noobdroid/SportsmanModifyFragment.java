@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.muddzdev.styleabletoast.StyleableToast;
@@ -34,7 +35,7 @@ public class SportsmanModifyFragment extends Fragment {
     public ArrayList<Integer> sportsIDs;
     public int selectedSportID;
     public int sportID;
-    public TextInputEditText inputID;
+    public TextView inputID;
     public TextInputEditText inputFirstName;
     public TextInputEditText inputLastName;
     public TextInputEditText inputHeadquarters;
@@ -60,7 +61,7 @@ public class SportsmanModifyFragment extends Fragment {
         Button buttonCancel = view.findViewById(R.id.btn_cancel_sportsman);
         Spinner spinnerSport = view.findViewById(R.id.input_sport);
         sportID = sportsman.getSportId();
-        inputID = view.findViewById(R.id.input_id);
+        inputID = view.findViewById(R.id.input_modify_id);
         inputFirstName = view.findViewById(R.id.input_first_name);
         inputLastName = view.findViewById(R.id.input_last_name);
         inputHeadquarters = view.findViewById(R.id.input_headquarters);
@@ -198,7 +199,7 @@ public class SportsmanModifyFragment extends Fragment {
                     localDB.localDBInterface().updateSportsman(sportsman);
                     new StyleableToast
                             .Builder(getContext())
-                            .text("Sportman modified")
+                            .text("Sportsman modified")
                             .textColor(Color.WHITE)
                             .backgroundColor(Color.GREEN)
                             .show();

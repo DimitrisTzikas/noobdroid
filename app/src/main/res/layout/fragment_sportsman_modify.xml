@@ -7,16 +7,6 @@
     tools:context=".SportsmanModifyFragment">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/input_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/input_last_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,8 +53,9 @@
         android:layout_marginTop="8dp"
         android:hint="@string/firstname"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_id" />
+        app:layout_constraintTop_toBottomOf="@+id/input_modify_id" />
 
     <Spinner
         android:id="@+id/input_sport"
@@ -101,5 +92,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
+
+    <TextView
+        android:id="@+id/input_modify_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

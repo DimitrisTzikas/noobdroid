@@ -51,6 +51,12 @@
         <argument
             android:name="localDB"
             app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
+        <action
+            android:id="@+id/action_teamFragment_to_teamInsertFragment"
+            app:destination="@id/teamInsertFragment" />
+        <action
+            android:id="@+id/action_teamFragment_to_teamModifyFragment"
+            app:destination="@id/teamModifyFragment" />
     </fragment>
     <fragment
         android:id="@+id/sportInsertFragment"
@@ -107,6 +113,27 @@
             app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
         <argument
             android:name="sportsmanID"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamInsertFragment"
+        android:name="gr.ihu.noobdroid.TeamInsertFragment"
+        android:label="fragment_team_insert"
+        tools:layout="@layout/fragment_team_insert" >
+        <argument
+            android:name="localDB"
+            app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamModifyFragment"
+        android:name="gr.ihu.noobdroid.TeamModifyFragment"
+        android:label="fragment_team_modify"
+        tools:layout="@layout/fragment_team_modify" >
+        <argument
+            android:name="localDB"
+            app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
+        <argument
+            android:name="teamID"
             app:argType="integer" />
     </fragment>
 </navigation>
