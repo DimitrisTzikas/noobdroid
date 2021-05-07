@@ -14,11 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.google.android.gms.common.util.Strings;
 import com.google.android.material.textfield.TextInputEditText;
 import com.muddzdev.styleabletoast.StyleableToast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +49,7 @@ public class SportsmanInsertFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sportsman_insert, container, false);
 
-        Button buttonInsert = view.findViewById(R.id.btn_insert_sportsman);
+        Button buttonInsert = view.findViewById(R.id.btn_modify_sportsman);
         Button buttonCancel = view.findViewById(R.id.btn_cancel_sportsman);
         inputID = view.findViewById(R.id.input_id);
         inputFirstName = view.findViewById(R.id.input_first_name);

@@ -14,14 +14,14 @@
             android:id="@+id/action_mainFragment_to_sportFragment"
             app:destination="@id/sportFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_sportsmanFragment"
-            app:destination="@id/sportsmanFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_raceFragment"
             app:destination="@id/raceFragment" />
         <action
             android:id="@+id/action_mainFragment_to_teamFragment"
             app:destination="@id/teamFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sportsmanFragment"
+            app:destination="@id/sportsmanFragment" />
     </fragment>
     <fragment
         android:id="@+id/sportFragment"
@@ -37,21 +37,6 @@
         <argument
             android:name="localDB"
             app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
-    </fragment>
-    <fragment
-        android:id="@+id/sportsmanFragment"
-        android:name="gr.ihu.noobdroid.SportsmanFragment"
-        android:label="fragment_sportsman"
-        tools:layout="@layout/fragment_sportsman" >
-        <argument
-            android:name="localDB"
-            app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
-        <action
-            android:id="@+id/action_sportsmanFragment_to_sportsmanInsertFragment"
-            app:destination="@id/sportsmanInsertFragment" />
-        <action
-            android:id="@+id/action_sportsmanFragment_to_sportsmanModifyFragment"
-            app:destination="@id/sportsmanModifyFragment" />
     </fragment>
     <fragment
         android:id="@+id/raceFragment"
@@ -89,10 +74,25 @@
             app:argType="integer" />
     </fragment>
     <fragment
+        android:id="@+id/sportsmanFragment"
+        android:name="gr.ihu.noobdroid.SportsmanFragment"
+        android:label="fragment_sportsman"
+        tools:layout="@layout/fragment_sportsman">
+        <argument
+            android:name="localDB"
+            app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
+        <action
+            android:id="@+id/action_sportsmanFragment_to_sportsmanInsertFragment"
+            app:destination="@id/sportsmanInsertFragment" />
+        <action
+            android:id="@+id/action_sportsmanFragment_to_sportsmanModifyFragment"
+            app:destination="@id/sportsmanModifyFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/sportsmanInsertFragment"
         android:name="gr.ihu.noobdroid.SportsmanInsertFragment"
         android:label="fragment_sportsman_insert"
-        tools:layout="@layout/fragment_sportsman_insert" >
+        tools:layout="@layout/fragment_sportsman_insert">
         <argument
             android:name="localDB"
             app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />
@@ -101,7 +101,7 @@
         android:id="@+id/sportsmanModifyFragment"
         android:name="gr.ihu.noobdroid.SportsmanModifyFragment"
         android:label="fragment_sportsman_modify"
-        tools:layout="@layout/fragment_sportsman_modify" >
+        tools:layout="@layout/fragment_sportsman_modify">
         <argument
             android:name="localDB"
             app:argType="gr.ihu.noobdroid.LocalDB.LocalDB" />

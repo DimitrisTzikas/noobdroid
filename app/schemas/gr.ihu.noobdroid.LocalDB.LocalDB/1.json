@@ -1,0 +1,164 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "5923ec9a797e16840c3b666990857701",
+    "entities": [
+      {
+        "tableName": "sports",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sport_id` INTEGER NOT NULL, `sport_name` TEXT, `is_team_game` INTEGER NOT NULL, `is_male_game` INTEGER NOT NULL, PRIMARY KEY(`sport_id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "sport_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "sport_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isTeamGame",
+            "columnName": "is_team_game",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isMaleGame",
+            "columnName": "is_male_game",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "sport_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "sportsman",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sportsman_id` INTEGER NOT NULL, `sportsman_first_name` TEXT, `sportsman_last_name` TEXT, `sportsman_headquarters` TEXT, `sportsman_country` TEXT, `sportsman_sportId` INTEGER NOT NULL, `sportsman_birth_year` INTEGER NOT NULL, PRIMARY KEY(`sportsman_id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "sportsman_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "sportsman_first_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastName",
+            "columnName": "sportsman_last_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "headquarters",
+            "columnName": "sportsman_headquarters",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "sportsman_country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sportId",
+            "columnName": "sportsman_sportId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "birthYear",
+            "columnName": "sportsman_birth_year",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "sportsman_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "teams",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`team_id` INTEGER NOT NULL, `team_name` TEXT, `team_stadium` TEXT, `team_headquarters` TEXT, `team_country` TEXT, `team_sport_id` INTEGER NOT NULL, `team_establish_year` INTEGER NOT NULL, PRIMARY KEY(`team_id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "team_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "team_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stadium",
+            "columnName": "team_stadium",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "headquarters",
+            "columnName": "team_headquarters",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "team_country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sportId",
+            "columnName": "team_sport_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "establishYear",
+            "columnName": "team_establish_year",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "team_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5923ec9a797e16840c3b666990857701')"
+    ]
+  }
+}

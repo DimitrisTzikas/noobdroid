@@ -6,7 +6,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -37,6 +36,9 @@ public interface LocalDBInterface {
 
     @Query("select * from sportsman")
     public List<Sportsman> getSportsman();
+
+    @Query("select * from sportsman where sportsman_id = :id")
+    public Sportsman getSportsmanByID(int id);
 
     @Query("delete from sportsman where sportsman_id = :id")
     public void deleteSportsmanById(int id);

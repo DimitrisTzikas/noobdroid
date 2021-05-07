@@ -124,8 +124,7 @@ public class SportModifyFragment extends Fragment {
     }
 
     public boolean isNameValid() {
-        // TODO
-        // validate name
+        // TODO validate name
         return true;
     }
 
