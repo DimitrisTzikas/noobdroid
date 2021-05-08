@@ -44,6 +44,7 @@ public class TeamFragment extends Fragment {
         Button buttonInsert = view.findViewById(R.id.btn_insert);
         Button buttonModify = view.findViewById(R.id.btn_modify);
         Button buttonDelete = view.findViewById(R.id.btn_delete);
+        Button buttonAddPlayers = view.findViewById(R.id.btn_add_players);
 
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +96,25 @@ public class TeamFragment extends Fragment {
                 }
 
                 refresh(view);
+            }
+        });
+
+        buttonAddPlayers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedTeamID == -1) {
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("No team to add players")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.GRAY)
+                            .show();
+                }
+                else {
+                    TeamFragmentDirections.ActionTeamFragmentToTeamAddPlayerFragment action;
+                    action = TeamFragmentDirections.actionTeamFragmentToTeamAddPlayerFragment(localDB, selectedTeamID);
+                    Navigation.findNavController(v).navigate(action);
+                }
             }
         });
 

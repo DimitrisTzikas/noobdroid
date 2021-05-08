@@ -108,12 +108,13 @@ public class Team {
             return new ArrayList<Integer>();
         }
         else {
-            ArrayList<String> temp = (ArrayList<String>) Arrays.asList(this.teamPlayersIDs.split(","));
-            temp.remove(temp.size() - 1);
+            List<String> temp = Arrays.asList(this.teamPlayersIDs.split(","));
             ArrayList<Integer> intTemp = new ArrayList<Integer>();
 
             for (int i = 0; i < temp.size(); i++) {
-                intTemp.add(Integer.parseInt(temp.get(i)));
+                if (!temp.get(i).equals("")) {
+                    intTemp.add(Integer.parseInt(temp.get(i)));
+                }
             }
 
             return intTemp;
@@ -122,6 +123,17 @@ public class Team {
 
     public void addPlayer(int sportsmanId) {
         this.teamPlayersIDs += String.valueOf(sportsmanId) + ",";
+    }
+
+    public void removePlayer(int sportsmanId) {
+        List<String> temp = Arrays.asList(this.teamPlayersIDs.split(","));
+        String tempString = "";
+        for (int i = 0; i < temp.size(); i++) {
+            if (!temp.get(i).equals(String.valueOf(sportsmanId))) {
+                tempString += temp.get(i) + ",";
+            }
+        }
+        this.teamPlayersIDs = tempString;
     }
 
     @Override
