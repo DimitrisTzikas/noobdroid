@@ -2,10 +2,6 @@ package gr.ihu.noobdroid;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.room.Room;
 
 import com.muddzdev.styleabletoast.StyleableToast;
 
@@ -32,7 +32,11 @@ public class TeamFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        localDB = SportsmanFragmentArgs.fromBundle(getArguments()).getLocalDB();
+        localDB = Room.databaseBuilder(
+                this.getContext(),
+                LocalDB.class,
+                "local"
+        ).allowMainThreadQueries().build();
         teamIDs = new ArrayList<Integer>();
     }
 

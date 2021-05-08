@@ -1,14 +1,9 @@
 package gr.ihu.noobdroid.LocalDB;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.util.StringUtil;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,11 @@ public class SportFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        localDB = SportFragmentArgs.fromBundle(getArguments()).getLocalDB();
+        localDB = Room.databaseBuilder(
+                this.getContext(),
+                LocalDB.class,
+                "local"
+        ).allowMainThreadQueries().build();
         sportsIDs = new ArrayList<Integer>();
     }
 

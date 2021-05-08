@@ -18,9 +18,6 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.muddzdev.styleabletoast.StyleableToast;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

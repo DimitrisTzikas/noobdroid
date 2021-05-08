@@ -41,7 +41,7 @@ public class SportsmanInsertFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        localDB = SportsmanFragmentArgs.fromBundle(getArguments()).getLocalDB();
+        localDB = SportsmanInsertFragmentArgs.fromBundle(getArguments()).getLocalDB();
     }
 
     @Override

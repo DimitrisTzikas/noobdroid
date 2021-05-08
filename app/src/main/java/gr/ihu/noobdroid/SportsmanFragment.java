@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.ihu.noobdroid.LocalDB.LocalDB;
-import gr.ihu.noobdroid.LocalDB.Sport;
 import gr.ihu.noobdroid.LocalDB.Sportsman;
 
 public class SportsmanFragment extends Fragment {
@@ -33,7 +33,11 @@ public class SportsmanFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        localDB = SportsmanFragmentArgs.fromBundle(getArguments()).getLocalDB();
+        localDB = Room.databaseBuilder(
+                this.getContext(),
+                LocalDB.class,
+                "local"
+        ).allowMainThreadQueries().build();
         sportsmanIDs = new ArrayList<Integer>();
     }
 

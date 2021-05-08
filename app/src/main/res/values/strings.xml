@@ -21,4 +21,11 @@
     <string name="stadium">Stadium</string>
     <string name="establishyear">Establish Year</string>
     <string name="addplayers">Add Players</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Noobdroid</string>
+    <string name="nav_header_subtitle">Welcome to Noobdroid</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
