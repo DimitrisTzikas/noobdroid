@@ -26,6 +26,17 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Noobdroid</string>
     <string name="nav_header_subtitle">Welcome to Noobdroid</string>
+    <string name="home">Home</string>
+    <string name="noobdroid">Noobdroid</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="modifyteam">Modify Team</string>
+    <string name="insertteam">Insert Team</string>
+    <string name="addplayerteam">Add Player</string>
+    <string name="insertsport">Insert Sport</string>
+    <string name="modifysport">Modify Sport</string>
+    <string name="insertsportsman">Insert Sportsman</string>
+    <string name="modifysportsman">Modify Sportsman</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

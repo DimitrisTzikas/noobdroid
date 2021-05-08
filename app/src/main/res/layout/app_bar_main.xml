@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.Noobdroid.PopupOverlay" />
+            app:popupTheme="@style/Theme.Noobdroid.PopupOverlay"
+            app:title="@string/noobdroid"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
