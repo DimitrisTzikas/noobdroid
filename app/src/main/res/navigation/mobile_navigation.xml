@@ -123,4 +123,9 @@
             android:name="teamID"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/raceFragment"
+        android:name="gr.ihu.noobdroid.RaceFragment"
+        android:label="@string/race"
+        tools:layout="@layout/fragment_race" />
 </navigation>

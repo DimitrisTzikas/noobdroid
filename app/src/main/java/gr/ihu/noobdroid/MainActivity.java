@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
                 R.id.mainFragment,
                 R.id.sportFragment,
                 R.id.sportsmanFragment,
-                R.id.teamFragment
+                R.id.teamFragment,
+                R.id.raceFragment
         )
                 .setDrawerLayout(drawer)
                 .build();

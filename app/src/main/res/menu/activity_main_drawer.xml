@@ -20,5 +20,9 @@
             android:id="@+id/teamFragment"
             android:icon="@drawable/team"
             android:title="@string/team" />
+        <item
+            android:id="@+id/raceFragment"
+            android:icon="@drawable/race"
+            android:title="@string/race"/>
     </group>
 </menu>
