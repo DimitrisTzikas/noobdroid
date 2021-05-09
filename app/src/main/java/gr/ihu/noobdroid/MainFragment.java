@@ -3,6 +3,7 @@ package gr.ihu.noobdroid;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import gr.ihu.noobdroid.LocalDB.LocalDB;
+import gr.ihu.noobdroid.LocalDB.Sport;
 
 public class MainFragment extends Fragment {
 
+    public LocalDB localDB;
     public String selectedDatabase;
     public String selectedField;
     public String selectedComparison;
@@ -28,6 +34,12 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        localDB = Room.databaseBuilder(
+                this.getContext(),
+                LocalDB.class,
+                "local"
+        ).allowMainThreadQueries().build();
     }
 
     @Override
@@ -363,12 +375,134 @@ public class MainFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedValue = array.get(position);
+                executeQuery(view);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    public void executeQuery(View view) {
+        ArrayList<String> output = new ArrayList<String>();
+
+        switch (selectedDatabase) {
+            case "Sports":
+                List<Sport> sports = localDB.localDBInterface().getSports();
+
+                switch (selectedField) {
+                    case "ID":
+                        switch (selectedComparison) {
+                            case "Equals":
+                                for (int i = 0; i < sports.size(); i++) {
+                                    if (sports.get(i).getId() == Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sports.get(i).getId()
+                                                        + ", Name: " + sports.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Larger":
+                                for (int i = 0; i < sports.size(); i++) {
+                                    if (sports.get(i).getId() > Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sports.get(i).getId()
+                                                        + ", Name: " + sports.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Smaller":
+                                for (int i = 0; i < sports.size(); i++) {
+                                    if (sports.get(i).getId() < Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sports.get(i).getId()
+                                                        + ", Name: " + sports.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                        }
+                        break;
+                    case "TeamGame":
+                        if (selectedComparison.equals("Equals")) {
+                            for (int i = 0; i < sports.size(); i++) {
+                                if (sports.get(i).isTeamGame() == selectedValue.equals("True")) {
+                                    output.add(
+                                            "ID: " + sports.get(i).getId()
+                                                    + ", Name: " + sports.get(i).getName()
+                                    );
+                                }
+                            }
+                        }
+                        else {
+                            for (int i = 0; i < sports.size(); i++) {
+                                if (sports.get(i).isTeamGame() != selectedValue.equals("True")) {
+                                    output.add(
+                                            "ID: " + sports.get(i).getId()
+                                                    + ", Name: " + sports.get(i).getName()
+                                    );
+                                }
+                            }
+                        }
+                        break;
+                    case "MaleGame":
+                        if (selectedComparison.equals("Equals")) {
+                            for (int i = 0; i < sports.size(); i++) {
+                                if (sports.get(i).isMaleGame() == selectedValue.equals("True")) {
+                                    output.add(
+                                            "ID: " + sports.get(i).getId()
+                                                    + ", Name: " + sports.get(i).getName()
+                                    );
+                                }
+                            }
+                        }
+                        else {
+                            for (int i = 0; i < sports.size(); i++) {
+                                if (sports.get(i).isMaleGame() != selectedValue.equals("True")) {
+                                    output.add(
+                                            "ID: " + sports.get(i).getId()
+                                                    + ", Name: " + sports.get(i).getName()
+                                    );
+                                }
+                            }
+                        }
+                        break;
+                }
+                break;
+            case "Sportsman":
+                switch (selectedField) {
+                    case "ID":
+                        break;
+                    case "Sport":
+                        break;
+                    case "Birth Year":
+                        break;
+                }
+                break;
+            case "Teams":
+                switch (selectedField) {
+                    case "ID":
+                        break;
+                    case "Establish Year":
+                        break;
+                    case "Player":
+                        break;
+                }
+                break;
+        }
+
+        ArrayAdapter adapter = new ArrayAdapter(
+                getContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                output
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        resultSpinner.setAdapter(adapter);
+
     }
 
 }
