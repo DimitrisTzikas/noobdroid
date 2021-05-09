@@ -37,6 +37,11 @@
     <string name="modifysport">Modify Sport</string>
     <string name="insertsportsman">Insert Sportsman</string>
     <string name="modifysportsman">Modify Sportsman</string>
+    <string name="database">Database</string>
+    <string name="field">Field</string>
+    <string name="result">Result</string>
+    <string name="comparison">Comparison</string>
+    <string name="comparisonvalue">Value</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
