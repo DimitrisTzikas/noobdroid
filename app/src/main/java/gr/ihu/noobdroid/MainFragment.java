@@ -35,6 +35,7 @@ public class MainFragment extends Fragment {
     public Spinner compareValueSpinner;
     public Spinner resultSpinner;
     public ArrayList<Integer> playersID;
+    public ArrayList<Integer> sportsIDs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -269,8 +270,8 @@ public class MainFragment extends Fragment {
 
     public void refreshSelectedFieldSport(View view) {
         ArrayList<String> comparisons = new ArrayList<String>();
-        comparisons.add("Is");
-        comparisons.add("Isn't");
+        comparisons.add("Has");
+        comparisons.add("Hasn't");
 
         ArrayAdapter adapter = new ArrayAdapter(
                 getContext(),
@@ -343,7 +344,16 @@ public class MainFragment extends Fragment {
                             array.add(String.valueOf(i));
                         break;
                     case "Sport":
-                        // TODO
+                        List<Sport> sports = localDB.localDBInterface().getSports();
+                        sportsIDs = new ArrayList<Integer>();
+
+                        for (int i = 0; i < sports.size(); i++) {
+                            sportsIDs.add(sports.get(i).getId());
+                            array.add(
+                                    "ID: " + sports.get(i).getId()
+                                            + ", Name: " + sports.get(i).getName()
+                            );
+                        }
                         break;
                     case "Birth Year":
                         for (int i = 1960; i <= 2010; i++)
@@ -530,7 +540,30 @@ public class MainFragment extends Fragment {
                         }
                         break;
                     case "Sport":
-                        // TODO
+                        switch (selectedComparison) {
+                            case "Has":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getSportId() == sportsIDs.get(selectedValuePosition)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Hasn't":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getSportId() != sportsIDs.get(selectedValuePosition)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                        }
                         break;
                     case "Birth Year":
                         switch (selectedComparison) {
