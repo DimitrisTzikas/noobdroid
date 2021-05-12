@@ -1,64 +1,113 @@
 package gr.ihu.noobdroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RaceFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.muddzdev.styleabletoast.StyleableToast;
+
+import gr.ihu.noobdroid.firebase.Race;
+
 public class RaceFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public FirebaseFirestore db;
+    private int rid,sid;
+    private String day,city,country;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public int selectedRaceId;
 
-    public RaceFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RaceFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RaceFragment newInstance(String param1, String param2) {
-        RaceFragment fragment = new RaceFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        db = FirebaseFirestore.getInstance();
+
+        CollectionReference dbRace = db.collection("Race");
+        Race race = new Race(sid,day,city,country);
+
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_race, container, false);
+        View view = inflater.inflate(R.layout.fragment_race, container, false);
+
+
+        Button buttonInsert = view.findViewById(R.id.btn_insert);
+        Button buttonDisplay = view.findViewById(R.id.btn_display);
+        Button buttonDelete = view.findViewById(R.id.btn_delete);
+
+        buttonInsert.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Navigation.findNavController(v).navigate(R.id.action_raceFragment_to_raceInsertFragment);
+
+            }
+        });
+
+        buttonDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_raceFragment_to_raceDetailsActivity);
+
+                //Intent i = new Intent(RaceFragment.this, RaceDetailsActivity.class);
+                //startActivity(i);
+
+//                if(selectedRaceId == -1){
+//                    new StyleableToast
+//                            .Builder(getContext())
+//                            .text("Nothing to modify")
+//                            .textColor(Color.WHITE)
+//                            .backgroundColor(Color.GRAY)
+//                            .show();
+//                }
+//                else {
+//                    //RaceFragmentDirections.ActionRaceFragmentToRaceInsertFragment action;
+//                   // action = RaceFragmentDirections.actionRaceFragmentToRaceInsertFragment(db,selectedRaceId);
+//                   // Navigation.findNavController(v).navigate(action);
+//                }
+
+            }
+        });
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*if(selectedRaceId == -1){
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Nothing to delete")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.GRAY)
+                            .show();
+                }
+                else  {
+                    /////////////////////////////////
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Race deleted")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.GREEN)
+                            .show();
+                }*/
+
+            }
+        });
+
+        return view;
     }
 }
