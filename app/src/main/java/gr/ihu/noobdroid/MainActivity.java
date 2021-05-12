@@ -1,5 +1,6 @@
 package gr.ihu.noobdroid;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -27,6 +29,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("AppSettingsPreferences", 0);
+        boolean isNightModeOn = sharedPreferences.getBoolean("NightMode", false);
+
+        if (isNightModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,17 +68,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                new StyleableToast
-                        .Builder(this)
-                        .text("Settings")
-                        .textColor(Color.WHITE)
-                        .backgroundColor(Color.GREEN)
-                        .show();
-            default:
-                return super.onOptionsItemSelected(item);
+            case R.id.action_toggle_theme:
+                SharedPreferences sharedPreferences = getSharedPreferences("AppSettingsPreferences", 0);
+                SharedPreferences.Editor editor = getSharedPreferences("AppSettingsPreferences", 0).edit();
+                boolean isNightModeOn = sharedPreferences.getBoolean("NightMode", false);
 
+                if (isNightModeOn) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.putBoolean("NightMode", false);
+                }
+                else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.putBoolean("NightMode", true);
+                }
+                editor.apply();
+                break;
+            case R.id.action_about:
+                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.aboutFragment);
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
