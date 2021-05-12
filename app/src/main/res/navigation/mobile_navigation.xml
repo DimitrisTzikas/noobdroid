@@ -16,10 +16,18 @@
         tools:layout="@layout/fragment_sport">
         <action
             android:id="@+id/action_sportFragment_to_sportInsertFragment"
-            app:destination="@id/sportInsertFragment" />
+            app:destination="@id/sportInsertFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_sportFragment_to_sportModifyFragment"
-            app:destination="@id/sportModifyFragment" />
+            app:destination="@id/sportModifyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/sportInsertFragment"
@@ -49,10 +57,18 @@
         tools:layout="@layout/fragment_sportsman">
         <action
             android:id="@+id/action_sportsmanFragment_to_sportsmanInsertFragment"
-            app:destination="@id/sportsmanInsertFragment" />
+            app:destination="@id/sportsmanInsertFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_sportsmanFragment_to_sportsmanModifyFragment"
-            app:destination="@id/sportsmanModifyFragment" />
+            app:destination="@id/sportsmanModifyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/sportsmanInsertFragment"
@@ -103,13 +119,25 @@
         tools:layout="@layout/fragment_team">
         <action
             android:id="@+id/action_teamFragment_to_teamModifyFragment"
-            app:destination="@id/teamModifyFragment" />
+            app:destination="@id/teamModifyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_teamFragment_to_teamInsertFragment"
-            app:destination="@id/teamInsertFragment" />
+            app:destination="@id/teamInsertFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_teamFragment_to_teamAddPlayerFragment"
-            app:destination="@id/teamAddPlayerFragment" />
+            app:destination="@id/teamAddPlayerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/teamAddPlayerFragment"
