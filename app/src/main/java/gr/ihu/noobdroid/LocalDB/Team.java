@@ -98,16 +98,6 @@ public class Team {
         return this.teamPlayersIDs;
     }
 
-    public boolean hasPlayer(int playerID) {
-        ArrayList<Integer> playersIDs = this.getTeamPlayersID();
-        for (int i = 0; i < playersIDs.size(); i++) {
-            if (playersIDs.get(i) == playerID) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public ArrayList<Integer> getTeamPlayersID() {
         if (this.teamPlayersIDs.equals("")) {
             return new ArrayList<Integer>();

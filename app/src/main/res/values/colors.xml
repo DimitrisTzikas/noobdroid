@@ -7,13 +7,4 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="mist">#90AFC5</color>
-    <color name="stone">#336B87</color>
-    <color name="shadow">#2A3132</color>
-    <color name="autumn_foliage">#763626</color>
-    <color name="deep_aqua">#003B46</color>
-    <color name="ocean">#07575B</color>
-    <color name="wave">#66A5AD</color>
-    <color name="seafoam">#C4DFE6</color>
-    <color name="seafoam_light">#E4F0FF</color>
 </resources>
