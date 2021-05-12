@@ -156,4 +156,9 @@
         android:name="gr.ihu.noobdroid.RaceFragment"
         android:label="@string/race"
         tools:layout="@layout/fragment_race" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="gr.ihu.noobdroid.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

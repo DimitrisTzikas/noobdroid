@@ -82,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
                     editor.putBoolean("NightMode", true);
                 }
                 editor.apply();
-            default:
-                return super.onOptionsItemSelected(item);
-
+                break;
+            case R.id.action_about:
+                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.aboutFragment);
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
