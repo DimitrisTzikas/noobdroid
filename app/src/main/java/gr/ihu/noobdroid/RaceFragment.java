@@ -10,32 +10,37 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.muddzdev.styleabletoast.StyleableToast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import gr.ihu.noobdroid.firebase.Race;
 
 public class RaceFragment extends Fragment {
 
     public FirebaseFirestore db;
-    private int rid,sid;
-    private String day,city,country;
-
-    public int selectedRaceId;
+    public CollectionReference dbRace;
+    public String raceId;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = FirebaseFirestore.getInstance();
-
-        CollectionReference dbRace = db.collection("Race");
-        Race race = new Race(sid,day,city,country);
+        dbRace = db.collection("Race");
 
     }
 
@@ -43,44 +48,30 @@ public class RaceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_race, container, false);
 
-
-        Button buttonInsert = view.findViewById(R.id.btn_insert);
-        Button buttonDisplay = view.findViewById(R.id.btn_display);
-        Button buttonDelete = view.findViewById(R.id.btn_delete);
-
-        buttonInsert.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                Navigation.findNavController(v).navigate(R.id.action_raceFragment_to_raceInsertFragment);
-
+        Spinner spinner = view.findViewById(R.id.output_spinner);
+        List<String> list = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        dbRace.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                for (QueryDocumentSnapshot documentSnapshot: task.getResult()) {
+                    String item = documentSnapshot.getId();
+                    list.add(item);
+                }
+                adapter.notifyDataSetChanged();
             }
         });
 
-        buttonDisplay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_raceFragment_to_raceDetailsActivity);
+        Button buttonInsert = view.findViewById(R.id.btn_insert);
+        Button buttonModify = view.findViewById(R.id.btn_modify);
+        Button buttonDelete = view.findViewById(R.id.btn_delete);
 
-                //Intent i = new Intent(RaceFragment.this, RaceDetailsActivity.class);
-                //startActivity(i);
+        buttonInsert.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_raceFragment_to_raceInsertFragment));
 
-//                if(selectedRaceId == -1){
-//                    new StyleableToast
-//                            .Builder(getContext())
-//                            .text("Nothing to modify")
-//                            .textColor(Color.WHITE)
-//                            .backgroundColor(Color.GRAY)
-//                            .show();
-//                }
-//                else {
-//                    //RaceFragmentDirections.ActionRaceFragmentToRaceInsertFragment action;
-//                   // action = RaceFragmentDirections.actionRaceFragmentToRaceInsertFragment(db,selectedRaceId);
-//                   // Navigation.findNavController(v).navigate(action);
-//                }
-
-            }
+        buttonModify.setOnClickListener(v -> {
+            raceId = spinner.getSelectedItem().toString();
+            Navigation.findNavController(v).navigate(RaceFragmentDirections.actionRaceFragmentToRaceModifyFragment(raceId));
         });
 
         buttonDelete.setOnClickListener(new View.OnClickListener() {

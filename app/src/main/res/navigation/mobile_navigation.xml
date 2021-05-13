@@ -132,16 +132,20 @@
             android:id="@+id/action_raceFragment_to_raceInsertFragment"
             app:destination="@id/raceInsertFragment" />
         <action
-            android:id="@+id/action_raceFragment_to_raceDetailsActivity"
-            app:destination="@id/raceDetailsActivity" />
+            android:id="@+id/action_raceFragment_to_raceModifyFragment"
+            app:destination="@id/raceModifyFragment" />
     </fragment>
     <fragment
         android:id="@+id/raceInsertFragment"
         android:name="gr.ihu.noobdroid.RaceInsertFragment"
         tools:layout="@layout/fragment_race_insert"/>
-    <activity
-        android:id="@+id/raceDetailsActivity"
-        android:name="gr.ihu.noobdroid.RaceDetailsActivity"
-        android:label="racedetails"
-        tools:layout="@layout/racedetails" />
+    <fragment
+        android:id="@+id/raceModifyFragment"
+        android:name="gr.ihu.noobdroid.RaceModifyFragment"
+        android:label="fragment_race_modify"
+        tools:layout="@layout/fragment_race_modify" >
+        <argument
+            android:name="raceId"
+            app:argType="string" />
+    </fragment>
 </navigation>
