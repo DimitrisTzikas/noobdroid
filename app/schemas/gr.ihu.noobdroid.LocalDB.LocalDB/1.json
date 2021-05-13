@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b1b5436fcec7fa17be252dc2fa8ddaf0",
+    "identityHash": "816932f8809f9e7b07733f89424dbc2d",
     "entities": [
       {
         "tableName": "sports",
@@ -100,7 +100,7 @@
       },
       {
         "tableName": "teams",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`team_id` INTEGER NOT NULL, `team_name` TEXT, `team_stadium` TEXT, `team_headquarters` TEXT, `team_country` TEXT, `team_sport_id` INTEGER NOT NULL, `team_establish_year` INTEGER NOT NULL, `team_players_ids` TEXT, PRIMARY KEY(`team_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`team_id` INTEGER NOT NULL, `team_name` TEXT, `team_stadium` TEXT, `team_headquarters` TEXT, `location_x` INTEGER NOT NULL, `location_y` INTEGER NOT NULL, `team_country` TEXT, `team_sport_id` INTEGER NOT NULL, `team_establish_year` INTEGER NOT NULL, `team_players_ids` TEXT, PRIMARY KEY(`team_id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -125,6 +125,18 @@
             "columnName": "team_headquarters",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "locationX",
+            "columnName": "location_x",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationY",
+            "columnName": "location_y",
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "country",
@@ -164,7 +176,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b1b5436fcec7fa17be252dc2fa8ddaf0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '816932f8809f9e7b07733f89424dbc2d')"
     ]
   }
 }

@@ -138,6 +138,9 @@
             app:exitAnim="@anim/fragment_fade_exit"
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_teamFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/teamAddPlayerFragment"
@@ -161,4 +164,18 @@
         android:name="gr.ihu.noobdroid.AboutFragment"
         android:label="@string/about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="gr.ihu.noobdroid.MapsFragment"
+        android:label="@string/maps"
+        tools:layout="@layout/fragment_maps" >
+        <argument
+            android:name="positionX"
+            app:argType="integer" />
+        <argument android:name="positionY"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

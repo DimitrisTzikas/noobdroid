@@ -79,6 +79,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_team_country" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_team_locationx"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/establishyear"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_team_sport" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_team_locationy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/establishyear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/input_team_sport" />
+
     <Spinner
         android:id="@+id/input_team_sport"
         android:layout_width="0dp"

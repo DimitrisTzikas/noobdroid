@@ -20,6 +20,10 @@ public class Team {
     private String stadium;
     @ColumnInfo (name = "team_headquarters")
     private String headquarters;
+    @ColumnInfo (name = "location_x")
+    private int locationX;
+    @ColumnInfo (name = "location_y")
+    private int locationY;
     @ColumnInfo (name = "team_country")
     private String country;
     @ColumnInfo (name = "team_sport_id")
@@ -29,12 +33,14 @@ public class Team {
     @ColumnInfo (name = "team_players_ids")
     private String teamPlayersIDs;
 
-    public Team(int id, String name, String stadium, String headquarters, String country,
+    public Team(int id, String name, String stadium, String headquarters, int locationX, int locationY, String country,
                 int sportId, int establishYear) {
         this.id = id;
         this.name = name;
         this.stadium = stadium;
         this.headquarters = headquarters;
+        this.locationX = locationX;
+        this.locationY = locationY;
         this.country = country;
         this.sportId = sportId;
         this.establishYear = establishYear;
@@ -55,6 +61,14 @@ public class Team {
 
     public void setHeadquarters(String headquarters) {
         this.headquarters = headquarters;
+    }
+
+    public void setLocationX(int locationX) {
+        this.locationX = locationX;
+    }
+
+    public void setLocationY(int locationY) {
+        this.locationY = locationY;
     }
 
     public void setCountry(String country) {
@@ -87,6 +101,14 @@ public class Team {
     public String getStadium() { return this.stadium; }
 
     public String getHeadquarters() { return this.headquarters; }
+
+    public int getLocationX() {
+        return this.locationX;
+    }
+
+    public int getLocationY() {
+        return this.locationY;
+    }
 
     public String getCountry() { return this.country; }
 
@@ -145,10 +167,12 @@ public class Team {
     public String toString() {
         return "Team{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", stadium='" + stadium + '\'' +
-                ", headquarters='" + headquarters + '\'' +
-                ", country='" + country + '\'' +
+                ", name=" + name + '\n' +
+                ", stadium=" + stadium + '\n' +
+                ", headquarters=" + headquarters + '\n' +
+                ", locationX=" + locationX +
+                ", locationY=" + locationY +
+                ", country=" + country + '\n' +
                 ", sportId=" + sportId +
                 ", establishYear=" + establishYear +
                 '}';

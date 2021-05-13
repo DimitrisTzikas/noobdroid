@@ -86,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_about:
                 Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.aboutFragment);
                 break;
+            case R.id.action_maps:
+                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.mapsFragment);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
