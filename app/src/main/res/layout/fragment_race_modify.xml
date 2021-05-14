@@ -7,22 +7,13 @@
     tools:context=".RaceModifyFragment">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edit_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edit_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/date"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_id" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edit_city"

@@ -31,6 +31,12 @@ public class Race implements Serializable {
         this.day = day;
     }
 
+    public Race(String city, String country, String day){
+        this.city = city;
+        this.country = country;
+        this.day = day;
+    }
+
     public int getSid() {
         return sid;
     }

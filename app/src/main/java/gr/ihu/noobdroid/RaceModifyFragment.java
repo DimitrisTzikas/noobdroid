@@ -1,5 +1,6 @@
 package gr.ihu.noobdroid;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,7 +36,6 @@ public class RaceModifyFragment extends Fragment {
 
     public FirebaseFirestore db;
     public CollectionReference dbRace;
-    public TextInputEditText editID;
     public TextInputEditText editDate;
     public TextInputEditText editCity;
     public TextInputEditText editCountry;
@@ -58,25 +58,38 @@ public class RaceModifyFragment extends Fragment {
         Button buttonModify = view.findViewById(R.id.btn_modify_race);
         Button buttonCancel = view.findViewById(R.id.btn_cancel_race);
 
-        editID = view.findViewById(R.id.edit_id);
         editDate = view.findViewById(R.id.edit_date);
         editCity = view.findViewById(R.id.edit_city);
         editCountry = view.findViewById(R.id.edit_country);
+
+        dbRace.document(raceId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    String city = documentSnapshot.getString("city");
+                    String country = documentSnapshot.getString("country");
+                    String date = documentSnapshot.getString("day");
+
+                    editCity.setText(city);
+                    editCountry.setText(country);
+                    editDate.setText(date);
+
+                } else {
+                    // Message Error
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                // Message Error
+            }
+        });
 
         //firebase load race data
 
         buttonModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isIdValid()) {
-                    new StyleableToast
-                            .Builder(getContext())
-                            .text("Invalid ID")
-                            .textColor(Color.WHITE)
-                            .backgroundColor(Color.RED)
-                            .show();
-                    return;
-                }
                 if (!isDateValid()) {
                     new StyleableToast
                             .Builder(getContext())
@@ -104,8 +117,7 @@ public class RaceModifyFragment extends Fragment {
                             .show();
                     return;
                 }
-                editDataToFirestore(Integer.parseInt(editID.getText().toString()),
-                        editDate.getText().toString(),
+                editDataToFirestore(editDate.getText().toString(),
                         editCity.getText().toString(),
                         editCountry.getText().toString());
             }
@@ -120,28 +132,23 @@ public class RaceModifyFragment extends Fragment {
         return view;
     }
 
-    private void editDataToFirestore(int editID,String editDate,String editCity,String editCountry){
+    private void editDataToFirestore(String edit_Date,String edit_City,String edit_Country){
 
-        Race race = new Race(editID,editCity,editCountry,editDate);
+        Race race = new Race(edit_City,edit_Country,edit_Date);
 
         dbRace.document(raceId).set(race).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(getContext(),"Your race has been added to Firebase",Toast.LENGTH_SHORT).show();
+                //toast
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
-                Toast.makeText(getContext(),"Fail to add the Race\n" + e,Toast.LENGTH_SHORT).show();
+                //toast
             }
         });
-
     }
 
-    private Boolean isIdValid() {
-        // TODO Validate id
-        return !editID.getText().toString().equals("");
-    }
 
     private Boolean isDateValid() {
         // TODO Validate date

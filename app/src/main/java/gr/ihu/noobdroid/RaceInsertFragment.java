@@ -125,17 +125,6 @@ public class RaceInsertFragment extends Fragment {
                 Toast.makeText(getContext(),"Fail to add the Race\n" + e,Toast.LENGTH_SHORT).show();
             }
         });
-//                addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                Toast.makeText(getContext(),"Your race has been added to Firebase",Toast.LENGTH_SHORT).show();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull @NotNull Exception e) {
-//                Toast.makeText(getContext(),"Fail to add the Race\n" + e,Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
     }
 

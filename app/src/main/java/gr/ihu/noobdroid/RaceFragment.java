@@ -3,6 +3,7 @@ package gr.ihu.noobdroid;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -14,8 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,6 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.muddzdev.styleabletoast.StyleableToast;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,7 @@ public class RaceFragment extends Fragment {
     public FirebaseFirestore db;
     public CollectionReference dbRace;
     public String raceId;
+    public  String race;
 
 
     @Override
@@ -74,31 +80,18 @@ public class RaceFragment extends Fragment {
             Navigation.findNavController(v).navigate(RaceFragmentDirections.actionRaceFragmentToRaceModifyFragment(raceId));
         });
 
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonDelete.setOnClickListener(v -> {
+            raceId = spinner.getSelectedItem().toString();
+            dbRace.document(raceId).delete().addOnCompleteListener(task -> {
+                Toast.makeText(getContext(),"Your race has been deleted from Firebase",Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> {
+                Toast.makeText(getContext(),"Your race has been not deleted from Firebase",Toast.LENGTH_SHORT).show();
+            });
 
-                /*if(selectedRaceId == -1){
-                    new StyleableToast
-                            .Builder(getContext())
-                            .text("Nothing to delete")
-                            .textColor(Color.WHITE)
-                            .backgroundColor(Color.GRAY)
-                            .show();
-                }
-                else  {
-                    /////////////////////////////////
-                    new StyleableToast
-                            .Builder(getContext())
-                            .text("Race deleted")
-                            .textColor(Color.WHITE)
-                            .backgroundColor(Color.GREEN)
-                            .show();
-                }*/
+            list.remove(raceId);
+            adapter.notifyDataSetChanged();
 
-            }
         });
-
         return view;
     }
 }
