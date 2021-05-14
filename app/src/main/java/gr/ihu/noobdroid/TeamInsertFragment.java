@@ -3,6 +3,8 @@ package gr.ihu.noobdroid;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -166,6 +168,16 @@ public class TeamInsertFragment extends Fragment {
                             .textColor(Color.WHITE)
                             .backgroundColor(Color.GREEN)
                             .show();
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "1")
+                            .setSmallIcon(R.drawable.team)
+                            .setContentTitle("Team")
+                            .setContentText("Team added")
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText("Team added"))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+                    notificationManager.notify(0, builder.build());
                 } catch (Exception e) {
                     new StyleableToast
                             .Builder(getContext())

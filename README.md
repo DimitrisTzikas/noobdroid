@@ -9,7 +9,7 @@
 - [X] Διεπαφή Χρήστη
   - [X] Draw menu
   - [X] 3 ερωτήματα για κάθε βάση
-- [ ] Extra
+- [X] Extra
   - [X] portrait/landscape
-  - [ ] Google maps
-  - [ ] Notifications
+  - [X] Google maps
+  - [X] Notifications
