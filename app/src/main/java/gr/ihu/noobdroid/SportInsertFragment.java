@@ -87,7 +87,7 @@ public class SportInsertFragment extends Fragment {
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "1")
                             .setSmallIcon(R.drawable.sport)
-                            .setContentTitle("Sport")
+                            .setContentTitle("Noobdroid")
                             .setContentText("Sport added")
                             .setStyle(new NotificationCompat.BigTextStyle()
                                     .bigText("Sport added"))

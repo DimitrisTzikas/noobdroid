@@ -171,7 +171,7 @@ public class TeamInsertFragment extends Fragment {
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "1")
                             .setSmallIcon(R.drawable.team)
-                            .setContentTitle("Team")
+                            .setContentTitle("Noobdroid")
                             .setContentText("Team added")
                             .setStyle(new NotificationCompat.BigTextStyle()
                                     .bigText("Team added"))
