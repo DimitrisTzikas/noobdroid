@@ -1,64 +1,97 @@
 package gr.ihu.noobdroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RaceFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.muddzdev.styleabletoast.StyleableToast;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import gr.ihu.noobdroid.firebase.Race;
+
 public class RaceFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public FirebaseFirestore db;
+    public CollectionReference dbRace;
+    public String raceId;
+    public  String race;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public RaceFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RaceFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RaceFragment newInstance(String param1, String param2) {
-        RaceFragment fragment = new RaceFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        db = FirebaseFirestore.getInstance();
+        dbRace = db.collection("Race");
+
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_race, container, false);
+        View view = inflater.inflate(R.layout.fragment_race, container, false);
+
+        Spinner spinner = view.findViewById(R.id.output_spinner);
+        List<String> list = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        dbRace.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                for (QueryDocumentSnapshot documentSnapshot: task.getResult()) {
+                    String item = documentSnapshot.getId();
+                    list.add(item);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        Button buttonInsert = view.findViewById(R.id.btn_insert);
+        Button buttonModify = view.findViewById(R.id.btn_modify);
+        Button buttonDelete = view.findViewById(R.id.btn_delete);
+
+        buttonInsert.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_raceFragment_to_raceInsertFragment));
+
+        buttonModify.setOnClickListener(v -> {
+            raceId = spinner.getSelectedItem().toString();
+            Navigation.findNavController(v).navigate(RaceFragmentDirections.actionRaceFragmentToRaceModifyFragment(raceId));
+        });
+
+        buttonDelete.setOnClickListener(v -> {
+            raceId = spinner.getSelectedItem().toString();
+            dbRace.document(raceId).delete().addOnCompleteListener(task -> {
+                Toast.makeText(getContext(),"Your race has been deleted from Firebase",Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> {
+                Toast.makeText(getContext(),"Your race has been not deleted from Firebase",Toast.LENGTH_SHORT).show();
+            });
+
+            list.remove(raceId);
+            adapter.notifyDataSetChanged();
+
+        });
+        return view;
     }
 }

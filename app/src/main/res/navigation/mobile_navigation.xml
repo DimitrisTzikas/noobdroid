@@ -16,18 +16,10 @@
         tools:layout="@layout/fragment_sport">
         <action
             android:id="@+id/action_sportFragment_to_sportInsertFragment"
-            app:destination="@id/sportInsertFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/sportInsertFragment" />
         <action
             android:id="@+id/action_sportFragment_to_sportModifyFragment"
-            app:destination="@id/sportModifyFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/sportModifyFragment" />
     </fragment>
     <fragment
         android:id="@+id/sportInsertFragment"
@@ -57,18 +49,10 @@
         tools:layout="@layout/fragment_sportsman">
         <action
             android:id="@+id/action_sportsmanFragment_to_sportsmanInsertFragment"
-            app:destination="@id/sportsmanInsertFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/sportsmanInsertFragment" />
         <action
             android:id="@+id/action_sportsmanFragment_to_sportsmanModifyFragment"
-            app:destination="@id/sportsmanModifyFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/sportsmanModifyFragment" />
     </fragment>
     <fragment
         android:id="@+id/sportsmanInsertFragment"
@@ -119,18 +103,10 @@
         tools:layout="@layout/fragment_team">
         <action
             android:id="@+id/action_teamFragment_to_teamModifyFragment"
-            app:destination="@id/teamModifyFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/teamModifyFragment" />
         <action
             android:id="@+id/action_teamFragment_to_teamInsertFragment"
-            app:destination="@id/teamInsertFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/teamInsertFragment" />
         <action
             android:id="@+id/action_teamFragment_to_teamAddPlayerFragment"
             app:destination="@id/teamAddPlayerFragment"
@@ -158,7 +134,14 @@
         android:id="@+id/raceFragment"
         android:name="gr.ihu.noobdroid.RaceFragment"
         android:label="@string/race"
-        tools:layout="@layout/fragment_race" />
+        tools:layout="@layout/fragment_race" >
+        <action
+            android:id="@+id/action_raceFragment_to_raceInsertFragment"
+            app:destination="@id/raceInsertFragment" />
+        <action
+            android:id="@+id/action_raceFragment_to_raceModifyFragment"
+            app:destination="@id/raceModifyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="gr.ihu.noobdroid.AboutFragment"
@@ -176,6 +159,19 @@
             app:argType="integer" />
         <argument
             android:name="title"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/raceInsertFragment"
+        android:name="gr.ihu.noobdroid.RaceInsertFragment"
+        tools:layout="@layout/fragment_race_insert"/>
+    <fragment
+        android:id="@+id/raceModifyFragment"
+        android:name="gr.ihu.noobdroid.RaceModifyFragment"
+        android:label="fragment_race_modify"
+        tools:layout="@layout/fragment_race_modify" >
+        <argument
+            android:name="raceId"
             app:argType="string" />
     </fragment>
 </navigation>
