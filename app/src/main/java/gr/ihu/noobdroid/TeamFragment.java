@@ -49,6 +49,7 @@ public class TeamFragment extends Fragment {
         Button buttonModify = view.findViewById(R.id.btn_modify);
         Button buttonDelete = view.findViewById(R.id.btn_delete);
         Button buttonAddPlayers = view.findViewById(R.id.btn_add_players);
+        Button buttonMap = view.findViewById(R.id.btn_map);
 
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +119,41 @@ public class TeamFragment extends Fragment {
                     TeamFragmentDirections.ActionTeamFragmentToTeamAddPlayerFragment action;
                     action = TeamFragmentDirections.actionTeamFragmentToTeamAddPlayerFragment(localDB, selectedTeamID);
                     Navigation.findNavController(v).navigate(action);
+                }
+            }
+        });
+
+        buttonMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedTeamID == -1) {
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Nothing to show")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.GRAY)
+                            .show();
+                }
+                else {
+                    Team team = null;
+                    List<Team> teams = localDB.localDBInterface().getTeams();
+                    for (int i = 0; i < teams.size(); i++) {
+                        if (teams.get(i).getId() == selectedTeamID) {
+                            team = teams.get(i);
+                            break;
+                        }
+                    }
+
+                    if (team != null) {
+                        // TODO GET LOCATION OF HQ
+                        TeamFragmentDirections.ActionTeamFragmentToMapsFragment action;
+                        action = TeamFragmentDirections.actionTeamFragmentToMapsFragment(
+                                team.getLocationX(),
+                                team.getLocationY(),
+                                team.getHeadquarters()
+                        );
+                        Navigation.findNavController(v).navigate(action);
+                    }
                 }
             }
         });

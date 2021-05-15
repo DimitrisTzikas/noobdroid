@@ -3,6 +3,8 @@ package gr.ihu.noobdroid;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -33,6 +35,8 @@ public class TeamInsertFragment extends Fragment {
     public TextInputEditText inputHeadquarters;
     public TextInputEditText inputCountry;
     public TextInputEditText inputEstablishYear;
+    public TextInputEditText inputLocationX;
+    public TextInputEditText inputLocationY;
     public Spinner spinnerSportID;
     public ArrayList<Integer> sportsIDs;
     public int selectedSportID;
@@ -57,6 +61,8 @@ public class TeamInsertFragment extends Fragment {
         inputHeadquarters = view.findViewById(R.id.input_team_headquarters);
         inputCountry = view.findViewById(R.id.input_team_country);
         inputEstablishYear = view.findViewById(R.id.input_team_establishyear);
+        inputLocationX = view.findViewById(R.id.input_team_locationx);
+        inputLocationY = view.findViewById(R.id.input_team_locationy);
         spinnerSportID = view.findViewById(R.id.input_team_sport);
 
         buttonInsert.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +108,26 @@ public class TeamInsertFragment extends Fragment {
                     return;
                 }
 
+                if (! isLocationXValid()) {
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Invalid LocationX")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
+                    return;
+                }
+
+                if (! isLocationYValid()) {
+                    new StyleableToast
+                            .Builder(getContext())
+                            .text("Invalid LocationY")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
+                    return;
+                }
+
                 if (! isCountryValid()) {
                     new StyleableToast
                             .Builder(getContext())
@@ -127,6 +153,8 @@ public class TeamInsertFragment extends Fragment {
                         inputName.getText().toString(),
                         inputStadium.getText().toString(),
                         inputHeadquarters.getText().toString(),
+                        Integer.parseInt(inputLocationX.getText().toString()),
+                        Integer.parseInt(inputLocationX.getText().toString()),
                         inputCountry.getText().toString(),
                         selectedSportID,
                         Integer.parseInt(inputEstablishYear.getText().toString())
@@ -140,6 +168,16 @@ public class TeamInsertFragment extends Fragment {
                             .textColor(Color.WHITE)
                             .backgroundColor(Color.GREEN)
                             .show();
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "1")
+                            .setSmallIcon(R.drawable.team)
+                            .setContentTitle("Noobdroid")
+                            .setContentText("Team added")
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText("Team added"))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+                    notificationManager.notify(0, builder.build());
                 } catch (Exception e) {
                     new StyleableToast
                             .Builder(getContext())
@@ -222,6 +260,16 @@ public class TeamInsertFragment extends Fragment {
         return true;
     }
 
+    private boolean isLocationXValid() {
+        /// TODO validate locationx
+        return true;
+    }
+
+    private boolean isLocationYValid() {
+        // TODO validate locationy
+        return true;
+    }
+
     private boolean isCountryValid() {
         // TODO Validate country
         return true;
@@ -237,6 +285,8 @@ public class TeamInsertFragment extends Fragment {
         inputName.setText("");
         inputStadium.setText("");
         inputHeadquarters.setText("");
+        inputLocationX.setText("");
+        inputLocationY.setText("");
         inputCountry.setText("");
         inputEstablishYear.setText("");
         spinnerSportID.setSelection(0);

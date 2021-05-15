@@ -3,6 +3,8 @@ package gr.ihu.noobdroid;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -140,6 +142,16 @@ public class SportsmanInsertFragment extends Fragment {
                             .textColor(Color.WHITE)
                             .backgroundColor(Color.GREEN)
                             .show();
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "1")
+                            .setSmallIcon(R.drawable.sportsman)
+                            .setContentTitle("Noobdroid")
+                            .setContentText("Sportsman added")
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText("Sportsman added"))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+                    notificationManager.notify(0, builder.build());
                 } catch (Exception e) {
                     new StyleableToast
                             .Builder(getContext())

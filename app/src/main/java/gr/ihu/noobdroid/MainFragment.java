@@ -1,7 +1,12 @@
 package gr.ihu.noobdroid;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
@@ -12,11 +17,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import gr.ihu.noobdroid.LocalDB.LocalDB;
 import gr.ihu.noobdroid.LocalDB.Sport;
+import gr.ihu.noobdroid.LocalDB.Sportsman;
+import gr.ihu.noobdroid.LocalDB.Team;
 
 public class MainFragment extends Fragment {
 
@@ -25,11 +33,14 @@ public class MainFragment extends Fragment {
     public String selectedField;
     public String selectedComparison;
     public String selectedValue;
+    public int selectedValuePosition;
     public Spinner databaseSpinner;
     public Spinner fieldSpinner;
     public Spinner compareSpinner;
     public Spinner compareValueSpinner;
     public Spinner resultSpinner;
+    public ArrayList<Integer> playersID;
+    public ArrayList<Integer> sportsIDs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -264,8 +275,8 @@ public class MainFragment extends Fragment {
 
     public void refreshSelectedFieldSport(View view) {
         ArrayList<String> comparisons = new ArrayList<String>();
-        comparisons.add("Is");
-        comparisons.add("Isn't");
+        comparisons.add("Has");
+        comparisons.add("Hasn't");
 
         ArrayAdapter adapter = new ArrayAdapter(
                 getContext(),
@@ -290,8 +301,8 @@ public class MainFragment extends Fragment {
 
     public void refreshSelectedFieldPlayer(View view) {
         ArrayList<String> comparisons = new ArrayList<String>();
-        comparisons.add("Have");
-        comparisons.add("Haven't");
+        comparisons.add("Has");
+        comparisons.add("Hasn't");
 
         ArrayAdapter adapter = new ArrayAdapter(
                 getContext(),
@@ -338,7 +349,16 @@ public class MainFragment extends Fragment {
                             array.add(String.valueOf(i));
                         break;
                     case "Sport":
-                        // TODO
+                        List<Sport> sports = localDB.localDBInterface().getSports();
+                        sportsIDs = new ArrayList<Integer>();
+
+                        for (int i = 0; i < sports.size(); i++) {
+                            sportsIDs.add(sports.get(i).getId());
+                            array.add(
+                                    "ID: " + sports.get(i).getId()
+                                            + ", Name: " + sports.get(i).getName()
+                            );
+                        }
                         break;
                     case "Birth Year":
                         for (int i = 1960; i <= 2010; i++)
@@ -357,7 +377,17 @@ public class MainFragment extends Fragment {
                             array.add(String.valueOf(i));
                         break;
                     case "Player":
-                        // TODO
+                        List<Sportsman> sportsman = localDB.localDBInterface().getSportsman();
+                        playersID = new ArrayList<Integer>();
+
+                        for (int i = 0; i < sportsman.size(); i++) {
+                            playersID.add(sportsman.get(i).getId());
+                            array.add(
+                                    "ID: " + sportsman.get(i).getId()
+                                            + ", Full Name: " + sportsman.get(i).getFirstName()
+                                            + " " + sportsman.get(i).getLastName()
+                            );
+                        }
                         break;
                 }
                 break;
@@ -375,6 +405,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedValue = array.get(position);
+                selectedValuePosition = position;
                 executeQuery(view);
             }
 
@@ -473,22 +504,214 @@ public class MainFragment extends Fragment {
                 }
                 break;
             case "Sportsman":
+                List<Sportsman> sportsman = localDB.localDBInterface().getSportsman();
+
                 switch (selectedField) {
                     case "ID":
+                        switch (selectedComparison) {
+                            case "Equals":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getId() == Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Full Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Larger":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getId() > Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Smaller":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getId() < Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                        }
                         break;
                     case "Sport":
+                        switch (selectedComparison) {
+                            case "Has":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getSportId() == sportsIDs.get(selectedValuePosition)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Hasn't":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getSportId() != sportsIDs.get(selectedValuePosition)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                        }
                         break;
                     case "Birth Year":
+                        switch (selectedComparison) {
+                            case "Equals":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getBirthYear() == Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Full Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Larger":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getBirthYear() > Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Full Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Smaller":
+                                for (int i = 0; i < sportsman.size(); i++) {
+                                    if (sportsman.get(i).getBirthYear() < Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + sportsman.get(i).getId()
+                                                        + ", Full Name: " + sportsman.get(i).getFirstName()
+                                                        + " " + sportsman.get(i).getLastName()
+                                        );
+                                    }
+                                }
+                                break;
+                        }
                         break;
                 }
                 break;
             case "Teams":
+                List<Team> teams = localDB.localDBInterface().getTeams();
+
                 switch (selectedField) {
                     case "ID":
+                        switch (selectedComparison) {
+                            case "Equals":
+                                for (int i = 0; i < teams.size(); i++) {
+                                    if (teams.get(i).getId() == Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + teams.get(i).getId()
+                                                        + ", Name: " + teams.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Larger":
+                                for (int i = 0; i < teams.size(); i++) {
+                                    if (teams.get(i).getId() > Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + teams.get(i).getId()
+                                                        + ", Name: " + teams.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Smaller":
+                                for (int i = 0; i < teams.size(); i++) {
+                                    if (teams.get(i).getId() < Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + teams.get(i).getId()
+                                                        + ", Name: " + teams.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                        }
                         break;
                     case "Establish Year":
+                        switch (selectedComparison) {
+                            case "Equals":
+                                for (int i = 0; i < teams.size(); i++) {
+                                    if (teams.get(i).getEstablishYear() == Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + teams.get(i).getId()
+                                                        + ", Name: " + teams.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Larger":
+                                for (int i = 0; i < teams.size(); i++) {
+                                    if (teams.get(i).getEstablishYear() > Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + teams.get(i).getId()
+                                                        + ", Full Name: " + teams.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Smaller":
+                                for (int i = 0; i < teams.size(); i++) {
+                                    if (teams.get(i).getEstablishYear() < Integer.parseInt(selectedValue)) {
+                                        output.add(
+                                                "ID: " + teams.get(i).getId()
+                                                        + ", Full Name: " + teams.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                        }
                         break;
                     case "Player":
+                        switch (selectedComparison) {
+                            case "Has":
+                                for (int i = 0; i < teams.size(); i++) {
+                                    if (teams.get(i).hasPlayer(
+                                            playersID.get(
+                                                    selectedValuePosition
+                                            )
+                                    )) {
+                                        output.add(
+                                                "ID: " + teams.get(i).getId()
+                                                + ", Name: " + teams.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                            case "Hasn't":
+                                for (int i = 0; i < teams.size(); i++) {
+                                    if (!teams.get(i).hasPlayer(
+                                            playersID.get(
+                                                    selectedValuePosition
+                                            )
+                                    )) {
+                                        output.add(
+                                                "ID: " + teams.get(i).getId()
+                                                        + ", Name: " + teams.get(i).getName()
+                                        );
+                                    }
+                                }
+                                break;
+                        }
                         break;
                 }
                 break;
